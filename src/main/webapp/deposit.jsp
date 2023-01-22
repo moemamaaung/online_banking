@@ -12,7 +12,7 @@
 <body>
 	<c:import url="common/navbar.jsp"></c:import>
 	
-	<div class="container">
+	<div class="container p-3">
     <form action="account" method="post">
         <h2 class="text-center">Deposit Form</h2>
         
@@ -32,7 +32,7 @@
         
         <div class="mb-3">
             <label for="amount" class="form-label">Amount</label>
-            <input type="text" id="amount" name="amount" min="1000.0" value="${account.amount }" placeholder="Enter Amount" class="form-control" required="required" autofocus>
+            <input type="text" id="amount" name="amount"  max="${account.amount }" placeholder="Enter Amount" class="form-control" required="required" autofocus>
         </div>
         
         <div class="mb-3">

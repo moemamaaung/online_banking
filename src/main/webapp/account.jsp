@@ -1,13 +1,12 @@
 <%@page import="com.bank.model.AccountDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <c:import url="common/header.html"></c:import>
-<title>Insert title here</title>
 </head>
 <body>
 <c:import url="common/navbar.jsp"></c:import>
@@ -26,16 +25,17 @@
 				</tr>
 			</thead>
 			<tbody>
-			
+				<c:forEach var="account" items="${accountList }">
 					<tr>
-						<td> <c:out value="${personalAcc.accountno }"></c:out> </td>
-						<td> <c:out value="${personalAcc.name }"></c:out> </td>
-						<td> <c:out value="${personalAcc.amount }"></c:out> </td>
-						<td> <c:out value="${personalAcc.address }"></c:out> </td>
-						<td> <c:out value="${personalAcc.phno }"></c:out> </td>
-
 					
+					<td> <c:out value="${account.accountno }"></c:out> </td>
+						<td> <c:out value="${account.name }"></c:out> </td>
+						<td> <c:out value="${account.amount }"></c:out> </td>
+						<td> <c:out value="${account.address }"></c:out> </td>
+						<td> <c:out value="${account.phno }"></c:out> </td>
+			
 					</tr>
+					</c:forEach>
 			</tbody>
 			<tfoot>
 				<tr>

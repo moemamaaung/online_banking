@@ -11,7 +11,7 @@
 <body>
 <c:import url="common/navbar.jsp"></c:import>
 	
-	<div class="container">
+	<div class="container p-3">
     <form action="account" method="post">
         <h2 class="text-center">Account Registration</h2>
         

@@ -72,6 +72,8 @@ public class AccountController extends HttpServlet {
 		case "ACC":
 			showPersonal(request, response);
 			break;
+			
+			
 		case "LOAD_DEPOSIT":
 			loadDeposit(request, response);
 			break;
@@ -86,13 +88,8 @@ public class AccountController extends HttpServlet {
 			break;
 			
 
-
-//		case "UPDATE":
-//			updateResult(request, response);
-//			break;
-//		case "DELETE":
-//			deleteResult(request, response);
-//			break;
+			
+			
 		case "LOGOUT":
 			session.invalidate();
 			response.sendRedirect("login");
@@ -116,7 +113,7 @@ public class AccountController extends HttpServlet {
 		request.setAttribute("user",user);
 		List<Account> accountList = this.accountDAO.getAccountList();
 		request.setAttribute("accountList", accountList);
-		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("account.jsp");
 		rd.forward(request, response);
 		
 	}
@@ -155,6 +152,8 @@ public class AccountController extends HttpServlet {
 		response.sendRedirect("accountLogin");
 		
 	}
+	
+	
 	private void loadDeposit(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
@@ -175,58 +174,59 @@ public class AccountController extends HttpServlet {
 		request.setAttribute("user",user);
 		
 		int id = Integer.parseInt(request.getParameter("id"));
+		System.out.println("id is "+"--------------"+id);
+		
 		String accountno = request.getParameter("accountno");
+		System.out.println(accountno);
+		
 		String name = request.getParameter("name");
 		double amount= Double.parseDouble(request.getParameter("amount"));
 		String address = request.getParameter("address");
 		String phno = request.getParameter("phno");
 		
-		Account account = new Account(id, accountno, name, amount, address, phno);
-		int rowEffected = this.accountDAO.deposit(account);
+		Account account = this.accountDAO.getAccount(id);
+		int rowEffected = this.accountDAO.deposit(account,amount);
 		if(rowEffected > 0) {
 			showPersonal(request, response);
 		}
-		
 	}
 	
-	
-	
-	private void loadWithdrawn(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void loadWithdrawn(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		request.setAttribute("user",user);
-		
-		int id=Integer.parseInt(request.getParameter("id"));
-		//String accno = user.getAccountno();
+		request.setAttribute("user", user);
+
+		int id = Integer.parseInt(request.getParameter("id"));
 		Account account = this.accountDAO.getAccount(id);
 		request.setAttribute("account", account);
 		RequestDispatcher rd = request.getRequestDispatcher("withdrawn.jsp");
 		rd.forward(request, response);
-
 	}
-	
-	
-	private void withdrawn(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+	private void withdrawn(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		request.setAttribute("user",user);
-		
+		request.setAttribute("user", user);
+
 		int id = Integer.parseInt(request.getParameter("id"));
+		System.out.println("id is "+"--------------"+id);
 		String accountno = request.getParameter("accountno");
+		System.out.println(accountno);
 		String name = request.getParameter("name");
-		double amount= Double.parseDouble(request.getParameter("amount"));
+		double amount = Double.parseDouble(request.getParameter("amount"));
 		String address = request.getParameter("address");
 		String phno = request.getParameter("phno");
-		
-		Account account = new Account(id, accountno, name, amount, address, phno);
-		int rowEffected = this.accountDAO.withdrawn(account);
-		if(rowEffected >0) {
+
+		Account account = this.accountDAO.getAccount(id);
+		int rowEffected = this.accountDAO.withdrawn(account,amount);
+		if (rowEffected > 0) {
 			showPersonal(request, response);
 		}
-		
-		
-	}
 	
+}
+
 	
 	
 

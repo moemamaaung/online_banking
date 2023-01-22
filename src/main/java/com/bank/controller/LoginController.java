@@ -70,6 +70,7 @@ public class LoginController extends HttpServlet {
 	private void signin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		String accountno = request.getParameter("accountno");
+		System.out.println("accountno ____________"+accountno);
 		String originalPassword = request.getParameter("password");
 		
 		boolean valid = this.userDAO.isValidUser(accountno, originalPassword);

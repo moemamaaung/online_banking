@@ -76,12 +76,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>WithdrawnController</display-name>
-    <servlet-name>WithdrawnController</servlet-name>
-    <servlet-class>com.bank.controller.WithdrawnController</servlet-class>
+    <display-name>WithdrawController</display-name>
+    <servlet-name>WithdrawController</servlet-name>
+    <servlet-class>com.bank.controller.WithdrawController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>WithdrawnController</servlet-name>
+    <servlet-name>WithdrawController</servlet-name>
     <url-pattern>/withdrawn</url-pattern>
   </servlet-mapping>
 </web-app>

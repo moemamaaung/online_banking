@@ -1,12 +1,6 @@
 package com.bank.model;
 
-import java.security.NoSuchAlgorithmException;
-
-import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
-
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
-
-import com.hostmdy.crypto.PasswordValidator;
 
 
 
@@ -153,24 +145,21 @@ private DataSource dataSource;
 	}
 	
 	
-	public int deposit(Account account) {
+	public int deposit(Account account,double amt) {
 		int rowEffected = 0;
+		double oriBal=account.getAmount();
+		if(amt > 0.0) {
+			oriBal +=amt;
+		}
 		try {
 			connection = dataSource.getConnection();
 			
 			pStmt = connection.prepareStatement("UPDATE `account` SET "
-					+ "`accountno` = '?',"
-					+ " `name` = '?',"
-					+ " `amount` = amount+?,"
-					+ " `address` = '?',"
-					+ " `phno` = '?' WHERE (`id` = '?');"
+					+ " `amount` = ?, WHERE (`id` = ?);"
 					);
-			pStmt.setString(1, account.getAccountno());
-			pStmt.setString(2,account.getName());
-			pStmt.setDouble(3,account.getAmount());
-			pStmt.setString(4,account.getAddress());
-			pStmt.setString(5,account.getPhno());
-			pStmt.setInt(6, account.getId());
+			
+			pStmt.setDouble(1,oriBal);
+			pStmt.setInt(2, account.getId());
 			rowEffected = pStmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -183,24 +172,23 @@ private DataSource dataSource;
 
 	
 	
-	public int withdrawn(Account account) {
+	public int withdrawn(Account account,double amt) {
 		int rowEffected = 0;
+		double oriBal=account.getAmount();
+		if(oriBal>=amt)
+		{
+			oriBal-=amt;
+		}
+		
 		try {
 			connection = dataSource.getConnection();
 			
-			pStmt = connection.prepareStatement("UPDATE `account` SET "
-					+ "`accountno` = ?,"
-					+ " `name` = ?,"
-					+ " `amount` = amount-?,"
-					+ " `address` = ?,"
-					+ " `phno` = ? WHERE (`id` = ?);"
-					);
-			pStmt.setString(1, account.getAccountno());
-			pStmt.setString(2,account.getName());
-			pStmt.setDouble(3,account.getAmount());
-			pStmt.setString(4,account.getAddress());
-			pStmt.setString(5,account.getPhno());
-			pStmt.setInt(6, account.getId());
+			pStmt = connection.prepareStatement(
+					"UPDATE `account` SET"
+					+ " `amount` = ?  WHERE (`id` = ?);");
+			
+			pStmt.setDouble(1,oriBal);
+			pStmt.setInt(2, account.getId());
 			rowEffected = pStmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

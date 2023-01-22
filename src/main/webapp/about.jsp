@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">About Us</div>
-                        <h2 class="mb-4">Award Wining Consultancy Agency For Your Business</h2>
+                        <h2 class="mb-4">The Impact of Strategic For Your Business</h2>
                         <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod</p>
                         <div class="row g-3 mb-4">
                             <div class="col-12 d-flex">

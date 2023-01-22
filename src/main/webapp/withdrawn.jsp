@@ -12,17 +12,23 @@
 <body>
 	<c:import url="common/navbar.jsp"></c:import>
 	
-	<div class="container">
+	<div class="container p-3">
     <form action="account" method="post">
-        <h2 class="text-center">Deposit Form</h2>
+        <h2 class="text-center">Withdrawn Form</h2>
         
         <input type="hidden" name="mode" value="WITHDRAWN">
+        
         <input type="hidden" name="id" value="${account.id}">
         <h3> <c:out value="ID : ${account.id}"></c:out> </h3>
         
+        <div class="mb-3">
+            <label for="id" class="form-label">Id</label>
+            <input type="text" id="id" name="id" value="${account.id }" readonly="readonly" placeholder="Enter ID" class="form-control" required="required" autofocus>
+        </div>
+        
       <div class="mb-3">
             <label for="accountno" class="form-label">Account No</label>
-            <input type="text" id="accountno" name="accountno" value="${account.accountno }"  readonly="readonly" placeholder="Enter Account Number" class="form-control" required="required" autofocus>
+            <input type="text" id="accountno" name="accountno"  value="${account.accountno }"  readonly="readonly" placeholder="Enter Account Number" class="form-control" required="required" autofocus>
         </div> 
         
         <div class="mb-3">
@@ -32,7 +38,7 @@
         
         <div class="mb-3">
             <label for="amount" class="form-label">Amount</label>
-            <input type="text" id="amount" name="amount" min="1000.0" value="${account.amount }" placeholder="Enter Amount" class="form-control" required="required" autofocus>
+            <input type="text" id="amount" name="amount" min="1000.0" max="${account.amount }" placeholder="Enter Amount" class="form-control" required="required" autofocus>
         </div>
         
         <div class="mb-3">
